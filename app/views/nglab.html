@@ -44,6 +44,36 @@
 
 <div class="header" ng-app="">
   <h2>表单实验区</h2>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="panel-title">表单实验区</div>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+          <form role="form" class="form-horizontal">
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                邮箱：
+              </label>
+              <div class="col-md-10">
+                <input type="email" class="form-control" placeholder="填邮箱啊你">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">
+                密码：
+              </label>
+              <div class="col-md-10">
+                <input type="password" class="form-control" placeholder="这里填密码，懂不懂？">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <form novalidate>
     First Name:<br>
     <input type="text" ng-model="user.firstName"><br>
@@ -56,4 +86,17 @@
   <p>master = {{master}}</p>
 </div>
 
+<div class="header" ng-app="">
+  <h2>服务Service Factory 实验区</h2>
+  <table class="table table-striped table-hover">
+    <tr class='danger'>
+      <td>云主机名</td>
+      <td>云主机ID</td>
+    </tr>
+    <tr ng-repeat="x in dockers" class="info">
+      <td>{{ x.name | lowercase }}</td>
+      <td>{{ x.id | uppercase }}</td>
+    </tr>
+  </table>
+</div>
 <!--angularjs测试代码 -->
