@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app="helloworldApp">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -11,69 +11,13 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css">  
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/dashboard.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="helloworldApp">
-    <!--++++++++++++++++++ DIY TIME +++++++++++++++++-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/#/">Forward</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Profile</a></li>
-              <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-              <input type="text" class="form-control" placeholder="Search...">
-            </form>
-          </div>
-        </div>
-    </nav>
-    
-    <div class="container-fluid">
-      <div class="row">
-
-        <div class="col-sm-3 col-md-2 col-lg-2 sidebar navbar-inverse">
-          <ul class="nav nav-sidebar">
-            <li><a href="/#/nglab">Angularjs实验区</a></li>
-            <li><a href="/#/blog">Blog</a></li>
-            <li><a href="#">Nothing</a></li>
-            <li><a href="/#/about">About</a></li>
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-lg-10 col-lg-offset-2 main">
-            <div class="row">
-              <div ng-view=""></div>
-            </div>
-        </div>
-
-      </div>
-    </div>
-    <!--++++++++++++++++++ DIY TIME +++++++++++++++++-->
-
-
-
-
-
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
-       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
-       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
-       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-       ga('create', 'UA-XXXXX-X');
-       ga('send', 'pageview');
-    </script>
-
+  <body>
+    <div ui-view></div>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -86,16 +30,15 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/nglab.js"></script>
-        <script src="scripts/controllers/blog.js"></script>
-
-        <script src="scripts/controllers/about.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/animations.js"></script>
+    <script src="scripts/filters.js"></script>
+    <script src="scripts/services.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

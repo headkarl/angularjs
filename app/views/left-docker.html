@@ -1,0 +1,41 @@
+<div ng-controller="dockerCtrl">
+
+	<div class="header">
+	  <h2>云主机检视</h2>
+	</div>
+
+
+    <form role="form" class="form-horizontal">
+      <div class="form-group">
+        <label class="col-md-2 control-label">
+          <i class="glyphicon glyphicon-search">检索：</i>
+        </label>
+        <div class="col-md-10">
+          <input type="text" class="form-control" placeholder="Docker任意关键字" ng-model="dockername">
+        </div>
+      </div>
+	</form>
+
+	<table class="table table-condensed table-hover">
+	   <thead>
+	      <tr>
+			<th>ID</th>
+			<th>名称</th>
+			<th>内网IP</th>
+			<th>公网IP</th>
+			<th>所属服务器</th>
+	      </tr>
+	   </thead>
+	   <tbody class="table-striped">
+	      <tr ng-repeat="x in dockers | filter:dockername">
+
+			<td>{{ x.id }}</td>
+			<td>{{ x.name }}</td>
+			<td>{{ x.ipPri }}</td>
+			<td>{{ x.ipPub }}</td>
+			<td>{{ x.server }}</td>
+	      </tr>
+	   </tbody>
+	</table>
+
+</div>
