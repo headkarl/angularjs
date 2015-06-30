@@ -28,8 +28,27 @@ helloworldApp.controller('aboutCtrl', function ($scope) {
   });
 
 //Lab angularjs实验区控制器
-helloworldApp.controller('nglabCtrl', function ($scope) {
+helloworldApp.controller('nglabCtrl', function ($scope,vmInfos) {
+
+    $scope.queryVmInfos = function(){
+      $scope.vminfos = vmInfos.query().vm_infos;
+    };
+
+    $scope.queryVmInfos();
     
+// function GeekListCtrl($scope, Geek){  
+//     $scope.geeks = Geek.query();  
+//     $scope.show = function(id){  
+//         $scope.user = Geek.get({geekId: id});  
+//     };  
+// } 
+// helloworldApp.factory('vmInfos',function($resource){
+//   var url = "10.10.10.10";
+//   var ver = "v0.1";
+//   var vmInfosRestApi = $resource(url+"/api/"+ver+"/vminfos/:vmid", {},{} );
+//   return vmInfosRestApi;
+// });
+
   	$scope.person = {
   	  firstName: "John",
   	  lastName: "Doe"
