@@ -7,35 +7,57 @@
 
     <form role="form" class="form-horizontal">
       <div class="form-group">
+
         <label class="col-md-2 control-label">
-          <i class="glyphicon glyphicon-search">检索：</i>
+        	<i class="glyphicon glyphicon-search"></i>
+        	检索：
         </label>
-        <div class="col-md-10">
-          <input type="text" class="form-control" placeholder="Docker任意关键字" ng-model="dockername">
+        <div class="col-md-5">
+          <input type="text" class="form-control" placeholder="输入你想要检索的虚机ID" ng-model="vmid" ng-keypress="searchId($event)">
         </div>
+
+        <label class="col-md-2 control-label">
+        	每页条数：
+        </label>
+        <div class="col-md-3">
+        	<select name="pp" id="#" class="form-control" ng-model="pp" ng-change="refreshPP()">
+        		<option value="20">20</option>
+        		<option value="50">50</option>
+        		<option value="100">100</option>
+        	</select>
+        </div>
+
       </div>
 	</form>
 
-	<table class="table table-condensed table-hover">
-	   <thead>
-	      <tr>
-			<th>ID</th>
-			<th>名称</th>
-			<th>内网IP</th>
-			<th>公网IP</th>
-			<th>所属服务器</th>
-	      </tr>
-	   </thead>
-	   <tbody class="table-striped">
-	      <tr ng-repeat="x in dockers | filter:dockername">
+    <table class="table table-striped table-hover">
+      <tr class='danger'>
+        <td>虚机名称</td>
+        <td>虚机ID</td>
+        <td>虚机IP</td>
+        <td>虚机状态</td>
+        <td>网段ID</td> 
+        <td>节点ID</td>
+        <td>创建时间</td>
 
-			<td>{{ x.id }}</td>
-			<td>{{ x.name }}</td>
-			<td>{{ x.ipPri }}</td>
-			<td>{{ x.ipPub }}</td>
-			<td>{{ x.server }}</td>
-	      </tr>
-	   </tbody>
-	</table>
+      </tr>
+      <tr ng-repeat="x in vminfos" class="info">
+        <td>{{ x.vm_name }}</td>
+        <td>{{ x.vm_id }}</td>
+        <td>{{ x.ip }}</td>
+        <td>{{ x.vm_status }}</td>
+        <td>{{ x.vn_id }}</td>
+        <td>{{ x.pm_id }}</td>
+        <td>{{ x.creater_time }}</td>
+      </tr>
+    </table>
 
+
+	<div align="center">
+		<ul class="pagination pagination">
+			<li><a href="#">&laquo;首页</a></li>
+			<li ng-repeat="page in pages"><a href="#" ng-click="switchPage(page)">{{ page }}</a></li>
+			<li><a href="#">尾页&raquo;</a></li>
+		</ul>
+	</div>
 </div>

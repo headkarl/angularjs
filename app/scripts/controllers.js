@@ -29,26 +29,11 @@ helloworldApp.controller('aboutCtrl', function ($scope) {
 
 //Lab angularjs实验区控制器
 helloworldApp.controller('nglabCtrl', function ($scope,vmInfos) {
-
     $scope.queryVmInfos = function(){
       $scope.vminfos = vmInfos.query().vm_infos;
     };
 
     $scope.queryVmInfos();
-    
-// function GeekListCtrl($scope, Geek){  
-//     $scope.geeks = Geek.query();  
-//     $scope.show = function(id){  
-//         $scope.user = Geek.get({geekId: id});  
-//     };  
-// } 
-// helloworldApp.factory('vmInfos',function($resource){
-//   var url = "10.10.10.10";
-//   var ver = "v0.1";
-//   var vmInfosRestApi = $resource(url+"/api/"+ver+"/vminfos/:vmid", {},{} );
-//   return vmInfosRestApi;
-// });
-
   	$scope.person = {
   	  firstName: "John",
   	  lastName: "Doe"
@@ -86,15 +71,86 @@ helloworldApp.controller('blogCtrl', function ($scope) {
   });
 
 //云主机检视区控制器
-helloworldApp.controller('dockerCtrl', function ($scope) {
+helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
 
-    $scope.dockers = [
-        {id:'001', name:'Docker-001', ipPri:'10.11.101.4', ipPub:'112.33.1.12', server:'172.16.100.4'},
-        {id:'002', name:'Docker-002', ipPri:'10.11.102.4', ipPub:'112.33.2.22', server:'172.16.100.5'},
-        {id:'003', name:'Docker-003', ipPri:'10.11.101.7', ipPub:'112.33.3.19', server:'172.16.100.4'},
-        {id:'004', name:'Docker-004', ipPri:'10.11.103.13', ipPub:'112.33.4.101', server:'172.16.100.16'},
-        {id:'005', name:'Docker-005', ipPri:'10.11.105.101', ipPub:'112.33.5.10', server:'172.16.101.22'},
-        {id:'006', name:'Docker-006', ipPri:'10.11.101.11', ipPub:'112.33.6.6', server:'172.16.102.7'},        
-    ];
+    $scope.queryVmInfos = function(){
+      $scope.vminfos = vmInfos.query().vm_infos;
+    };
+
+    $scope.queryVmInfos();
+
+// function GeekListCtrl($scope, Geek){  
+//     $scope.geeks = Geek.query();  
+//     $scope.show = function(id){  
+//         $scope.user = Geek.get({geekId: id});  
+//     };  
+// } 
+// helloworldApp.factory('vmInfos',function($resource){
+//   var url = "10.10.10.10";
+//   var ver = "v0.1";
+//   var vmInfosRestApi = $resource(url+"/api/"+ver+"/vminfos/:vmid", {},{} );
+//   return vmInfosRestApi;
+// });
+
+    $scope.searchId = function(event){
+      if (event.keyCode !== 13) return;
+      var vmid = $scope.vmid;
+      $scope.vminfos = vmInfos.get({vmid:vmid});
+    }
+  
+
+    $scope.refreshPP = function(){
+      var pp = $scope.pp;
+      var page = 1;
+      $scope.vminfos = vmInfos.get({page:page,pp:pp});
+      $scope.total_page = $scope.vminfos.total_page;
+    }
+
+
+    $scope.pages = [1,2,3,4,5]
+    $scope.total_page = 10;
+
+    $scope.loadPage = function(current_page){
+      $scope.pages = []
+      var startpage = 1;
+      var endpage = $scope.total_page;
+
+      if ($scope.total_page > 1) {
+        if (current_page - 3 > 1) {
+          startpage = current_page - 3;
+        };
+        if (current_page + 3 <= $scope.total_page) {
+          endpage = current_page + 3;
+        };
+        if (startpage == 1 && $scope.total_page > 7) {
+          endpage = $scope.total_page;
+          break;
+        };
+        if (endpage == $scope.total_page && endpage > 7) {
+          startpage = endpage - 6;
+          break;
+        };
+      };
+
+
+
+      for (var i = startpage; i <= endpage; i++) {
+        $scope.pages.push(i);
+      };  
+    
+    }
+
+    $scope.switchPage = function(page){
+      $scope.loadPage(page);
+    }
+
+    // $scope.dockers = [
+    //     {id:'001', name:'Docker-001', ipPri:'10.11.101.4', ipPub:'112.33.1.12', server:'172.16.100.4'},
+    //     {id:'002', name:'Docker-002', ipPri:'10.11.102.4', ipPub:'112.33.2.22', server:'172.16.100.5'},
+    //     {id:'003', name:'Docker-003', ipPri:'10.11.101.7', ipPub:'112.33.3.19', server:'172.16.100.4'},
+    //     {id:'004', name:'Docker-004', ipPri:'10.11.103.13', ipPub:'112.33.4.101', server:'172.16.100.16'},
+    //     {id:'005', name:'Docker-005', ipPri:'10.11.105.101', ipPub:'112.33.5.10', server:'172.16.101.22'},
+    //     {id:'006', name:'Docker-006', ipPri:'10.11.101.11', ipPub:'112.33.6.6', server:'172.16.102.7'},        
+    // ];
 
   });
