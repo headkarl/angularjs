@@ -55,9 +55,9 @@
 
 	<div align="center">
 		<ul class="pagination pagination">
-			<li><a href="#">&laquo;首页</a></li>
+			<li><a href="#" ng-click="firstPage()">&laquo;首页</a></li>
 			<li ng-repeat="page in pages"><a href="#" ng-click="switchPage(page)">{{ page }}</a></li>
-			<li><a href="#">尾页&raquo;</a></li>
+			<li><a href="#" ng-click="lastPage()">尾页&raquo;</a></li>
 		</ul>
 	</div>
 </div>

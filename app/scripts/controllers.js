@@ -74,7 +74,11 @@ helloworldApp.controller('blogCtrl', function ($scope) {
 helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
 
     $scope.queryVmInfos = function(){
-      $scope.vminfos = vmInfos.query().vm_infos;
+      // $scope.vminfos = vmInfos.get().vm_infos;
+      vmInfos.get(function(callbackdata){
+        $scope.vminfos = callbackdata.vm_infos;
+      });
+      
     };
 
     $scope.queryVmInfos();
@@ -97,7 +101,6 @@ helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
       var vmid = $scope.vmid;
       $scope.vminfos = vmInfos.get({vmid:vmid});
     }
-  
 
     $scope.refreshPP = function(){
       var pp = $scope.pp;
@@ -106,33 +109,26 @@ helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
       $scope.total_page = $scope.vminfos.total_page;
     }
 
-
-    $scope.pages = [1,2,3,4,5]
-    $scope.total_page = 10;
-
     $scope.loadPage = function(current_page){
       $scope.pages = []
       var startpage = 1;
       var endpage = $scope.total_page;
 
-      if ($scope.total_page > 1) {
-        if (current_page - 3 > 1) {
-          startpage = current_page - 3;
-        };
-        if (current_page + 3 <= $scope.total_page) {
-          endpage = current_page + 3;
-        };
-        if (startpage == 1 && $scope.total_page > 7) {
+      if ($scope.total_page > 1 && $scope.total_page <=7) {
+          startpage = 1;
           endpage = $scope.total_page;
-          break;
-        };
-        if (endpage == $scope.total_page && endpage > 7) {
-          startpage = endpage - 6;
-          break;
-        };
+      } else if ($scope.total_page > 7) {
+          if (current_page > 3 && (current_page + 3) <= $scope.total_page) {
+            startpage = current_page - 3;
+            endpage = current_page + 3;
+          } else if (current_page <= 3) {
+            startpage = 1;
+            endpage = 7;
+          } else if ((current_page + 3) > $scope.total_page) {
+            startpage = $scope.total_page - 6;
+            endpage = $scope.total_page;
+          };
       };
-
-
 
       for (var i = startpage; i <= endpage; i++) {
         $scope.pages.push(i);
@@ -143,6 +139,18 @@ helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
     $scope.switchPage = function(page){
       $scope.loadPage(page);
     }
+
+    $scope.firstPage = function(){
+      $scope.loadPage(1);
+    }
+
+    $scope.lastPage = function(){
+      $scope.loadPage($scope.total_page);
+    }
+
+    $scope.pages = [1]
+    $scope.total_page = 15;
+    $scope.firstPage();
 
     // $scope.dockers = [
     //     {id:'001', name:'Docker-001', ipPri:'10.11.101.4', ipPub:'112.33.1.12', server:'172.16.100.4'},
