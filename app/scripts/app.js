@@ -36,9 +36,6 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
                 'sidebar@index': {
                     templateUrl: 'views/sidebar.html'
                 },
-                'dashboard@index': {
-                    templateUrl: 'views/dashboard.html'
-                },
                 'dashboard-left@index': {
                     templateUrl: 'views/left-main.html'
                 },
@@ -59,9 +56,6 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
                 },
                 'sidebar@nglab': {
                     templateUrl: 'views/sidebar.html'
-                },
-                'dashboard@nglab': {
-                    templateUrl: 'views/dashboard.html'
                 },
                 'dashboard-left@nglab': {
                     templateUrl: 'views/left-nglab.html'
@@ -84,9 +78,6 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
                 'sidebar@blog': {
                     templateUrl: 'views/sidebar.html'
                 },
-                'dashboard@blog': {
-                    templateUrl: 'views/dashboard.html'
-                },
                 'dashboard-left@blog': {
                     templateUrl: 'views/left-blog.html'
                 },
@@ -107,9 +98,6 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
                 },
                 'sidebar@docker': {
                     templateUrl: 'views/sidebar.html'
-                },
-                'dashboard@docker': {
-                    templateUrl: 'views/dashboard.html'
                 },
                 'dashboard-left@docker': {
                     templateUrl: 'views/left-docker.html'
@@ -132,9 +120,6 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
                 'sidebar@about': {
                     templateUrl: 'views/sidebar.html'
                 },
-                'dashboard@about': {
-                    templateUrl: 'views/dashboard.html'
-                },
                 'dashboard-left@about': {
                     templateUrl: 'views/left-about.html'
                 },
@@ -147,25 +132,3 @@ helloworldApp.config(function($stateProvider, $urlRouterProvider) {
 
 });
 
-// helloworldApp.config(function ($routeProvider) {
-//     $routeProvider
-//       .when('/', {
-//         templateUrl: 'views/main.html',
-//         controller: 'MainCtrl'
-//       })
-//       .when('/nglab', {
-//         templateUrl: 'views/nglab.html',
-//         controller: 'NgLab'
-//       })
-//       .when('/blog', {
-//         templateUrl: 'views/blog.html',
-//         controller: 'Blog'
-//       })
-//       .when('/about', {
-//         templateUrl: 'views/about.html',
-//         controller: 'AboutCtrl'
-//       })
-//       .otherwise({
-//         redirectTo: '/'
-//       });
-//   });

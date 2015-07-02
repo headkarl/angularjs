@@ -74,39 +74,26 @@ helloworldApp.controller('blogCtrl', function ($scope) {
 helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
 
     $scope.queryVmInfos = function(){
-      // $scope.vminfos = vmInfos.get().vm_infos;
       vmInfos.get(function(callbackdata){
         $scope.vminfos = callbackdata.vm_infos;
       });
-      
     };
-
-    $scope.queryVmInfos();
-
-// function GeekListCtrl($scope, Geek){  
-//     $scope.geeks = Geek.query();  
-//     $scope.show = function(id){  
-//         $scope.user = Geek.get({geekId: id});  
-//     };  
-// } 
-// helloworldApp.factory('vmInfos',function($resource){
-//   var url = "10.10.10.10";
-//   var ver = "v0.1";
-//   var vmInfosRestApi = $resource(url+"/api/"+ver+"/vminfos/:vmid", {},{} );
-//   return vmInfosRestApi;
-// });
 
     $scope.searchId = function(event){
       if (event.keyCode !== 13) return;
       var vmid = $scope.vmid;
-      $scope.vminfos = vmInfos.get({vmid:vmid});
+      vmInfos.get({vmid:vmid},function(callbackdata){
+        $scope.vminfos = callbackdata.vm_infos;
+      });
     }
 
     $scope.refreshPP = function(){
       var pp = $scope.pp;
       var page = 1;
-      $scope.vminfos = vmInfos.get({page:page,pp:pp});
-      $scope.total_page = $scope.vminfos.total_page;
+      vmInfos.get({page:page,pp:pp},function(callbackdata){
+        $scope.vminfos = callbackdata.vm_infos;
+        $scope.total_page = callbackdata.total_page;
+      });
     }
 
     $scope.loadPage = function(current_page){
@@ -132,7 +119,12 @@ helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
 
       for (var i = startpage; i <= endpage; i++) {
         $scope.pages.push(i);
-      };  
+      }; 
+
+      vmInfos.get({page:current_page,pp:$scope.pp},function(callbackdata){
+        $scope.vminfos = callbackdata.vm_infos;
+        $scope.total_page = callbackdata.total_page;
+      });
     
     }
 
@@ -148,8 +140,8 @@ helloworldApp.controller('dockerCtrl', function ($scope,vmInfos) {
       $scope.loadPage($scope.total_page);
     }
 
-    $scope.pages = [1]
-    $scope.total_page = 15;
+    $scope.pp = 20;
+    $scope.total_page = 1;
     $scope.firstPage();
 
     // $scope.dockers = [
